@@ -8,18 +8,40 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate
+{
 
-    override func viewDidLoad() {
+    @IBOutlet weak var myCollectionView: UICollectionView!
+
+    
+    var catagories = [CatagoryCell]()
+    var pics = ["grocery-trolley","homework","iron","shopping-bag"]
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return pics.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: "catagory", for: indexPath) as! CatagoryCell
+        
+        let catagory = pics[indexPath.item]
+        
+        
+        cell.myImage.image = UIImage(named: catagory)
 
+        return cell
+    }
+    
 
 }
 
